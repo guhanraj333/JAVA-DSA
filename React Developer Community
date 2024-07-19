@@ -1,0 +1,62 @@
+import java.util.*;
+class Graph {
+    private int V; 
+    private List<Integer>[] adj;     
+    public Graph(int V) {
+        this.V = V;
+        adj = new ArrayList[V];
+        for (int i = 0; i < V; i++) {
+            adj[i] = new ArrayList<>();
+        }
+    }
+    public void addEdge(int u, int v) {
+        adj[u].add(v);
+    }
+    private boolean isReachable(int src, int dest, boolean[] visited) {
+        if (src == dest) {
+            return true;
+        }   
+        visited[src] = true;
+        for (int neighbor : adj[src]) {
+            if (!visited[neighbor]) {
+                if (isReachable(neighbor, dest, visited)) {
+                    return true;
+                }
+            }
+        }      
+        return false;
+    }
+    public int checkReachability(int src, int dest) {
+        boolean[] visited = new boolean[V];
+        Arrays.fill(visited, false);
+        
+        // Perform DFS from src
+        if (isReachable(src, dest, visited)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int totalMembers = scanner.nextInt();
+        Graph graph = new Graph(totalMembers);
+        int[] members = new int[totalMembers];
+        for (int i = 0; i < totalMembers; i++) {
+            members[i] = scanner.nextInt();
+        }
+        int totalEdges = scanner.nextInt();
+        for (int i = 0; i < totalEdges; i++) {
+            int follower = scanner.nextInt();
+            int following = scanner.nextInt();
+            graph.addEdge(follower, following);
+        }
+        int A = scanner.nextInt();
+        int B = scanner.nextInt();
+        int result = graph.checkReachability(A, B);
+        System.out.println(result);
+        scanner.close();
+    }
+}
