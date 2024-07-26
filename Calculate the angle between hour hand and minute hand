@@ -1,0 +1,27 @@
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter hour: ");
+        int hour=sc.nextInt();
+        System.out.print("Enter minutes: ");
+        int minute=sc.nextInt();
+        int res=0;
+        if(hour==12)
+        hour=0;
+        if(minute==60)
+        { 
+            minute=0;
+            hour=hour+1;
+        }
+        if(hour>=0&&hour<=12&&minute>=0&&minute<=60)
+        {
+        res=(int)(Math.abs(30*hour-5.5*minute));
+        res=Math.min(360-res,res);
+        System.out.println("The angle is: "+res);
+        }
+        else{
+        System.out.println("Enter the values correctly");
+        }
+    }
+}
