@@ -14,3 +14,9 @@ class Main {
         System.out.println("The index for the given substring is "+res);
     }
 }
+
+// Find last index of the given subtring
+if(X.lastIndexOf(Y)==-1)
+            return -1;
+            else
+            return X.lastIndexOf(Y)+1; //
